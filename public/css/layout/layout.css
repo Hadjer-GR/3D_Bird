@@ -1,0 +1,100 @@
+
+body {
+    margin: 0;
+    width: 100vw !important;
+    font-family: "Heebo",sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #666565;
+    background-color: #EFFDF5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    padding: 0px !important;
+    height: 100vh !important;
+    width: 100vw;
+    overflow: hidden;
+}
+.nav-bar{
+    margin-top:0px !important;
+}
+.owl-carousel {
+    display: unset !important;
+}
+.col-md-6-m{
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 95% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        flex-wrap: wrap;
+    }
+    .navbar-light .navbar-nav .nav-link{
+        padding: 5px 10px !important;
+    }
+    .py-5 {
+        padding-top: 1.5rem !important;
+         padding-bottom: 1.5rem !important;
+    }
+    .mb-m{
+        white-space: pre !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+    
+.container, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+    max-width: 100% !important;
+}
+.container-layout{
+    /* border: 1px solid red !important; */
+    width: 100vw !important;
+    height: 100vh !important;
+    display: flex !important;
+    overflow-y: auto !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center;
+}
+.footer-layout{
+    visibility: visible !important;
+    animation-delay: 0.1s;
+    padding-top: 25px !important;
+    animation-name: fadeIn;
+    height: auto !important;
+    display: flex;
+    align-items: center !important;
+    justify-content: center;
+    
+}
+a{
+    cursor: pointer;
+}
+.footer-layout .py-5 {
+    padding-top: 10px !important;
+    padding-bottom: unset !important;
+}
+.col-md-6-m {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100% !important;
+    padding-right: unset !important; 
+    padding-left:unset !important;
+}
+.nav-bar{
+position: fixed !important;
+width: 95% !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+.author{
+    text-align: right;
+  font-size: 0.7em;
+  text-decoration: none;
+  color:rgba(255,255,255,0.5)!important;
+  /* cursor: none !important; */
+}
+/* @media (min-width: 1400px){
+.container, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+    max-width: 100vw !important;
+}
+} */
