@@ -1,12 +1,6 @@
-module.exports = {
-  productionSourceMap: false,
-  configureWebpack: {
-    optimization: {
-      splitChunks: {
-        chunks: 'all'
-      }
-    }
-  },
-  outputDir: 'dist',
-  publicPath: '/your-domain-name/'
-}
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true,
+  lintOnSave: false
+
+})
