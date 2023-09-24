@@ -1,0 +1,210 @@
+
+.sp{
+    white-space: pre;
+  }
+.s-1 {
+  margin-top: 3%;
+  position: relative;
+  width: 96%;
+  padding-right: 10px !important;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.m-1 {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 7px;
+  border: 1px solid #d0d5dd;
+  overflow-y: hidden;
+}
+
+.m-1 table {
+  border-collapse:separate !important;
+  border-spacing:0 15px !important;
+
+  background-color: white;
+  text-align: left;
+  width: 100%;
+  overflow-y: scroll;
+  height: auto;
+}
+.gfg {
+    border-collapse:separate;
+    border-spacing:0 15px;
+}
+table thead {
+  border-bottom: 1px solid #d0d5dd;
+}
+
+table body td tr {
+  font-size: 0.766em;
+}
+
+table thead th {
+  color: #00274c !important;
+  font-size: 1.1em !important;
+  font-weight: 600 !important;
+  font-family: Inter;
+  font-size: 0.9em;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20.929px;
+}
+
+table td,
+table th {
+  padding: 15px 10px;
+  font-size: 16px;
+}
+.chat {
+    margin-right:10px;
+}
+.chat svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chat svg:hover {
+  transform: scale(1.1);
+}
+
+table tr{
+    margin-bottom: 10px !important;
+  border-radius: 4px;
+  background: #FFF;
+  box-shadow: 0px 2px 16px 0px rgba(153, 155, 168, 0.12);
+}
+table .status {
+  text-align: center;
+  font-family: Inter;
+  font-size: 0.868em;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18.427px;
+  white-space: pre;
+  border-radius: 16.38px;
+  padding: 4.047px 8.19px 5.047px 8.142px;
+  width: 73px;
+}
+
+table .status-Regected {
+  color: #b42318;
+  border: 1.17px solid #fecdca;
+  background: #fef3f2;
+}
+
+table .status-Accepted {
+  border: 1px solid #abefc6;
+  background: #ecfdf3;
+  color: #027a48;
+}
+
+table .status-pending {
+  border: 1px solid #f9dbaf;
+  background: #fef6ee;
+  color: #95723f;
+}
+
+table .status-count-offer {
+  background-color: #eef4ff;
+  white-space: pre;
+  color: #3538cd;
+  border: 1px solid #c7d7fe;
+}
+
+table .amount {
+  text-align: right;
+}
+
+table .n-1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+}
+
+table .n-1 .n1-2 {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    object-fit: cover;
+    background-repeat: no-repeat;
+  color: #101828;
+  font-family: Inter;
+  font-size: 0.866em;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17.5px;
+  white-space: pre;
+  /* 142.857% */
+}
+
+table .n-1 .n1-1 {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+/* design search section  */
+
+.searchsection {
+  position: relative;
+  height: 50px;
+  margin-top: 2%;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+
+  border-radius: 7.97px;
+  border: 0.996px solid #d0d5dd;
+  background: #fff;
+}
+
+.searchbar {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 5px 10px;
+  gap: 11px;
+}
+
+.searchbar__input {
+  all: unset;
+}
+.searchbar__input {
+  position: relative;
+  color: #667085;
+  background: #ffff;
+  font-family: Inter;
+  font-size: 0.9em;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.925px;
+  flex-basis: 98%;
+}
+
+.searchbar_icon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+/*
+  * mobile phone
+  */
+  @media only screen and (max-width: 1160px) {
+
+ .m-1 table td,
+ .m-1 table th {
+   padding: 15px 17px !important;
+   font-size: 13px !important;
+ }
+}
+
