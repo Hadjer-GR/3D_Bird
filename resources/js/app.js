@@ -8,11 +8,9 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import {Link,Head,useForm} from "@inertiajs/vue3"
-// import JwPagination  from '../../node_modules/jw-vue-pagination'
-// import JwPagination from 'jw-vue-pagination';
+// import {pagination} from 'laravel-vue-pagination';
 // import { BPagination } from 'bootstrap-vue'
 // import  {BPagination } from '../../node_modules/bootstrap-vue'
-
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -25,7 +23,6 @@ createInertiaApp({
             .use(useForm)
             .component('Link',Link)
             .component('Head',Head)
-            // .component('jw-pagination', JwPagination)
             .mixin({methods:{route}})
             .mount(el);
     },

@@ -1,0 +1,9 @@
+.pagination_container{
+    display: inline-block;
+    position: absolute;
+    right: 5%;
+ }
+.hover_page{
+    color: #ffff;
+    background-color: var(--primary);
+}

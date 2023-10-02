@@ -43,7 +43,6 @@
           />
         </div>
       </div>
-      <!-- <jw-pagination :items="exampleItems" @changePage="onChangePage"></jw-pagination> -->
 
       <!-- table -->
       <div class="s-1">
@@ -61,7 +60,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in filteredItems" :key="index">
+              <tr v-for="(item, index) in products.data" :key="index">
                 <td>
                   <div class="n-1">
                     <img
@@ -107,6 +106,13 @@
           </table>
         </div>
       </div>
+      <!-- <TailwindPagination
+        :data="products"
+        @pagination-change-page="getResults"
+    /> -->
+    <pagination class="mt-6" :links="products.links" />
+
+
                         </div>
                     </div>
 
@@ -120,14 +126,23 @@
 </AdminLayout>
 </template>
 <script>
+
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import { router } from '@inertiajs/vue3'
+import pagination from '@/Components/pagination.vue';
 
 export default{
     components:{
-    AdminLayout
+    AdminLayout,
+    pagination
+
+},
+created(){
+    console.log(this.products);
+
 },
     props:{
-        loadProducts:Array
+        products:Object
     },
     data(){
       return{
@@ -135,39 +150,18 @@ export default{
         exampleItems:[1,2,3,4,5],
         pageOfItems: [],
 
-    list_mentor: [
-      {
-        Name: "Nato Cercvadze ",
-        status: "pending",
-      },
-      {
-        Name: "Nato Cercvadze",
-        status: "Regected",
-      },
 
-    ],
       }
     },
 
 methods: {
-  get_status_class(status) {
-    const class_status = "status status-" + status;
-    return class_status;
-  },
-  onChangePage(pageOfItems) {
-            // update page of items
-            this.pageOfItems = pageOfItems;
-        }
+
 },
 computed: {
- products(){
-    return JSON.parse(this.loadProducts);
-    },
-  filteredItems() {
-    return this.products.filter((item) => {
-      return item.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
-    });
-  },
+    getdata(){
+        console.log(this.products);
+
+    }
 },
 
 }
@@ -191,6 +185,9 @@ computed: {
 }
 .insert_model:hover{
     transform: scale(1.1);
+}
+.hover{
+    background-color: var(--primary) !important;
 }
 
 </style>

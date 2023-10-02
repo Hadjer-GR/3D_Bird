@@ -10,9 +10,9 @@ use Inertia\Inertia;
 class ProductController extends Controller
 {
    public function index(){
-      $loadProducts=Product::with('categories')->get()->toJson();
+      $products=Product::with('categories')->paginate(4);
 
-      return Inertia::render('Admin/products/index',compact('loadProducts'));
+      return Inertia::render('Admin/products/index',compact('products'));
 
    }
 
