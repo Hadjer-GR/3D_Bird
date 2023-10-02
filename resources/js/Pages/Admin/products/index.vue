@@ -49,35 +49,37 @@
         <div class="m-1">
           <table class="gfg">
             <thead>
-              <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Subcategory</th>
-                <th>state</th>
-                <th>File Size</th>
+              <tr class="head_product" >
+                <th class="head_product">Logo</th>
+                <th class="head_product">Name</th>
+                <th class="head_product">Category</th>
+                <th class="head_product">Subcategory</th>
+                <th class="head_product">state</th>
+                <th class="head_product">File Size</th>
 
-                <th>Actions</th>
+                <th class="head_product">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in products.data" :key="index">
-                <td>
+              <tr v-for="(item, index) in products.data" :key="index" class="item-product">
+                <td class="body_product">
                   <div class="n-1">
                     <img
                       class="n1-2"
                       src="../../../../../public/assets/img/back3.png"
                     />
-                    <span class="n1-2">{{ item.title }}</span>
+
                   </div>
                 </td>
-                <td>{{ item.categories['name'] }}</td>
-                <td>
+                <td class="body_product"> <span class="n1-2">{{ item.title }}</span></td>
+                <td class="body_product">{{ item.categories['name'] }}</td>
+                <td class="body_product">
                     {{ item.categories['sub_categorie']}}
                 </td>
-                <td class="sp">{{ item.state}}</td>
+                <td class="sp body_product">{{ item.state}}</td>
 
-                <td class="sp">{{ item.file_size }}</td>
-                <td>
+                <td class="sp body_product">{{ item.file_size }}</td>
+                <td class="body_product">
                   <button class="chat">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M3 11.9999C3 11.9999 6.27273 5.49994 12 5.49994C17.7273 5.49994 21 11.9999 21 11.9999C21 11.9999 17.7273 18.4999 12 18.4999C6.27273 18.4999 3 11.9999 3 11.9999Z" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

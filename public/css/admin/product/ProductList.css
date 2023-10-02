@@ -196,15 +196,33 @@ table .n-1 .n1-1 {
   height: 25px;
   cursor: pointer;
 }
+.m-1 table{
+    overflow: hidden !important;
+}
+.container{
+    position: relative;
+}
+.item-product{
+    cursor: pointer;
+   z-index: 30 !important;
+    transition: all 0.2s ;
+}
+.item-product:hover{
+transform: scale(1.02);
+}
+
 /*
   * mobile phone
   */
   @media only screen and (max-width: 1160px) {
 
- .m-1 table td,
- .m-1 table th {
-   padding: 15px 17px !important;
-   font-size: 13px !important;
+
+ .head_product{
+    padding: 15px 17px !important;
+
+ }
+.body_product{
+    padding: 0px 17px !important;
  }
 }
 

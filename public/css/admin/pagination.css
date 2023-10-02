@@ -1,9 +1,35 @@
 .pagination_container{
     display: inline-block;
     position: absolute;
+
+   bottom: -60px;
     right: 5%;
  }
 .hover_page{
     color: #ffff;
     background-color: var(--primary);
 }
+
+
+/*
+  * mobile phone
+  */
+  @media only screen and (max-width: 1160px) {
+    .pagination_container{
+
+
+       bottom: -40px !important;
+        right: 5% !important;
+     }
+    .py-3 {
+        padding-top: 0.4rem !important;
+        padding-bottom: 0.4rem !important;
+      }
+      .px-4 {
+        padding-right: 0.6rem !important;
+        padding-left: 0.6rem !important;
+      }
+      .mb-1 {
+        margin-bottom: 0rem !important;
+      }
+   }
