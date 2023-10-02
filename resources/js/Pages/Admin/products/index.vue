@@ -16,6 +16,7 @@
             <div class="container">
                     <button class="insert_model">Add a Model</button>
                              <!-- Search Input -->
+ <div class="c-search">
       <div class="searchsection">
         <div class="searchbar">
           <span class="searchbar_icon">
@@ -43,7 +44,9 @@
           />
         </div>
       </div>
+      <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn search-btn">Search</a>
 
+    </div>
       <!-- table -->
       <div class="s-1">
         <div class="m-1">
@@ -108,10 +111,7 @@
           </table>
         </div>
       </div>
-      <!-- <TailwindPagination
-        :data="products"
-        @pagination-change-page="getResults"
-    /> -->
+
     <pagination class="mt-6" :links="products.links" />
 
 

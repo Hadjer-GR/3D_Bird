@@ -210,7 +210,19 @@ table .n-1 .n1-1 {
 .item-product:hover{
 transform: scale(1.02);
 }
+.c-search {
+    position: relative;
+}
+.search-btn {
+    position: absolute;
+    right: 20px !important;
+    /* bottom: -2% !important; */
+    border-radius: 10px !important;
 
+    font-weight: 600;
+    font-size: 0.9em !important;
+    transform: all 0.2s;
+}
 /*
   * mobile phone
   */
