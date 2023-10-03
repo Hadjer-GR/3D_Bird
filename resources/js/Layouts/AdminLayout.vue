@@ -1,3 +1,6 @@
+
+
+
 <template>
 
     <div class="container-xxl bg-white p-0 container-layout">
@@ -26,7 +29,20 @@
             </nav>
         </div>
         <!-- Navbar End -->
+<!-- <div v-if=" number==1">{{ open() }} {{ show }}</div>
+<div v-if="$page.props.flush.message && show" style="position: absolute; top: 10.5%; background-color: #d22021; color: white; padding: 15px 10px ; width: auto; border-radius: 10px; text-align: center; font-size: 1em;font-weight: 600;   z-index: 60; margin-left: auto; margin-right: auto;"  >
+{{ $page.props.flush.message}}
+ {{ close() }}
+</div> -->
 
+
+
+
+    <!-- <div  class="alert alert-success" id="flush">
+       {{ $page.props.flush.message}}
+            message <br>
+            <button @click.prevent="close()">x</button>
+    </div> -->
 
     <slot ></slot>
 
@@ -37,9 +53,13 @@
 </div>
 </template>
 
-<script>
+
+
+<script >
+
 export default{
-
-
+    methods: {
+        
+    },
 }
 </script>

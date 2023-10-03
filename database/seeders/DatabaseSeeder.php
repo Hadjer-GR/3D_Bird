@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $user=User::factory()->create([
-            'email'=>"ghrabhadjer@gmail.com",
+            'email'=>"ghrabhadjerr@gmail.com",
             'password'=>'12345'
         ]);
-        Categorie::factory(5)->create([
+        Categorie::factory(40)->create([
             'name'=>'architecture',
         ])->each(function($categorie) use($user){
             Product::factory(5)->create([

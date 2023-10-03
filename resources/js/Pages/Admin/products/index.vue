@@ -10,10 +10,17 @@
         <link rel="stylesheet" href="../../css/admin/product/ProductList.css" />
 
 <AdminLayout>
+    <div  v-if="$page.props.flush.message" class="alert alert-success" id="flush" >
+       {{ $page.props.flush.message}}
+      <button @click.prevent=" close()">X</button>
 
+    </div>
    <!-- Property List Start -->
    <div class="container-xxl py-5">
             <div class="container">
+                <!-- <div>
+                    <h2>{{ state}} igig</h2>
+                </div> -->
                     <button class="insert_model">Add a Model</button>
                              <!-- Search Input -->
  <div class="c-search">
@@ -44,7 +51,7 @@
           />
         </div>
       </div>
-      <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn search-btn">Search</a>
+      <!-- <Link href="/wp-admin/product" :data="{ search }" preserve-state  class="btn btn-primary py-3 px-5 me-3 animated fadeIn search-btn">Search</Link> -->
 
     </div>
       <!-- table -->
@@ -94,7 +101,8 @@
   <path d="M17 3C17.2626 2.73735 17.5744 2.52901 17.9176 2.38687C18.2608 2.24473 18.6286 2.17157 19 2.17157C19.3714 2.17157 19.7392 2.24473 20.0824 2.38687C20.4256 2.52901 20.7374 2.73735 21 3C21.2626 3.26264 21.471 3.57444 21.6131 3.9176C21.7553 4.26077 21.8284 4.62856 21.8284 5C21.8284 5.37143 21.7553 5.73923 21.6131 6.08239C21.471 6.42555 21.2626 6.73735 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
                   </button>
-                  <button class="chat">
+
+                  <button class="chat" @click.prevent="delete_product(item.id)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M3 6.00006H5H21" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M8 6.00006V4.00006C8 3.46963 8.21071 2.96092 8.58579 2.58585C8.96086 2.21077 9.46957 2.00006 10 2.00006H14C14.5304 2.00006 15.0391 2.21077 15.4142 2.58585C15.7893 2.96092 16 3.46963 16 4.00006V6.00006M19 6.00006V20.0001C19 20.5305 18.7893 21.0392 18.4142 21.4143C18.0391 21.7893 17.5304 22.0001 17 22.0001H7C6.46957 22.0001 5.96086 21.7893 5.58579 21.4143C5.21071 21.0392 5 20.5305 5 20.0001V6.00006H19Z" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -144,7 +152,7 @@ created(){
 
 },
     props:{
-        products:Object
+        products:Object,state:Object
     },
     data(){
       return{
@@ -157,7 +165,13 @@ created(){
     },
 
 methods: {
-
+  delete_product(id){
+    console.log(id);
+     router.delete(`product/${id}`);
+  },
+  close(){
+            router.get('product');
+        }
 },
 computed: {
     getdata(){
@@ -169,6 +183,9 @@ computed: {
 }
 </script>
 <style >
+.container{
+    z-index: 50 !important;
+}
 .container-layout{
     justify-content: unset !important;
 }

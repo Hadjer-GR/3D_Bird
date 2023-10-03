@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+         //         if(!Schema::hasTable('products_tables')){
+
+        //     Schema::create('reviews', function (Blueprint $table) {
+        //         $table->id();
+        //         $table->timestamps();
+        //     });
+        // }
+         if(!Schema::hasTable('products_tables')){
         Schema::create('products_tables', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cat_id')->constrained()->onDelete('cascade');
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string("title");
             $table->string("state");
             $table->string("type");
@@ -28,6 +34,8 @@ return new class extends Migration
             $table->string("tags");
             $table->timestamps();
         });
+    }
+
     }
 
     /**
