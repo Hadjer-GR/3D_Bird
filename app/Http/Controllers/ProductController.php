@@ -19,7 +19,7 @@ class ProductController extends Controller
    }
 
    public function create(){
-    return Inertia::render('Delivery_address/create');
+    return Inertia::render('Admin/products/create');
 }
 
 /**

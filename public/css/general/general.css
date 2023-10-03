@@ -99,7 +99,8 @@
   color: var(--primary) !important;
 }
 .show_sub{
-  height: 130px !important;
+  max-height: 130px !important;
+  height: auto;
 
   /* -webkit-transition:height 1s; */
 

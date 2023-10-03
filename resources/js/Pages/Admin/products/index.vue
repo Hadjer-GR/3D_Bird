@@ -21,7 +21,7 @@
                 <!-- <div>
                     <h2>{{ state}} igig</h2>
                 </div> -->
-                    <button class="insert_model">Add a Model</button>
+                    <Link href="product/create" class="insert_model">Add a Model</Link>
                              <!-- Search Input -->
  <div class="c-search">
       <div class="searchsection">
