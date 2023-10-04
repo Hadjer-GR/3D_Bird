@@ -33,11 +33,12 @@
                                       </a>
                                         <div
                                             class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                            gigi
+                                            {{ categ }}
                                         </div>
                                         <div
                                             class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            gigi
+
+                                           {{Subcategorie2}}
                                         </div>
                                     </div>
                                     <div class="p-4 pb-0">
@@ -71,7 +72,7 @@
                 </div>
             </div>
             <div class="container-xxl bg-white p-0 create_p">
-                <form class="row">
+                <form class="row" @submit.prevent="submit_product()">
                     <div class="">
                         <div class="form-group col-md-6">
                             <label for="inputName4">Name</label>
@@ -84,7 +85,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputAddress"> Download link sketshup</label>
-                        <input v-model="link_sketshup" type="text" class="form-control" id="inputAddress" placeholder=".." />
+                        <input v-model="link_sketshup" type="text" class="form-control" id="inputAddress" placeholder="sketshup" />
                     </div>
                     <div class="form-group">
                         <label for="inputAddress2"> Download link 3ds</label>
@@ -92,7 +93,7 @@
                             type="text"
                             class="form-control"
                             id="inputAddress2"
-                            placeholder="..." />
+                            placeholder=" 3ds "/>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress2">Download link collada</label>
@@ -100,26 +101,33 @@
                             type="text"
                             class="form-control"
                             id="inputAddress2"
-                            placeholder="..." />
+                            placeholder="collada" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Download link lumion</label>
+                        <input v-model="link_lumion"
+                            type="text"
+                            class="form-control"
+                            id="inputAddress2"
+                            placeholder="lumion" />
                     </div>
                     <div class="form-row">
 
                      <div class="row mt-2">
                       <div class="form-group col-md-4">
                             <label for="inputState">Category</label>
-                            <select id="inputState" class="form-control">
+                            <select id="inputState" class="form-control" v-model="categ">
                                 <option v-for="item in loadCategories" >{{ item.name }}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">Sub Categorie</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>private page</option>
-                                <option>public page</option>
+                            <select id="inputState" class="form-control" v-model="subcateg">
+                                <option :value="sub_cat.id" v-for="sub_cat in filteredItems">{{ sub_cat.sub_categorie }}</option>
                             </select>
                         </div>
                      </div>
-                        <div class="form-group col-md-4 mt-2">
+                        <div class="form-group col-md-4 mt-1">
                             <label for="inputState">State</label>
                             <select id="inputState" class="form-control">
                                 <option selected>private page</option>
@@ -130,15 +138,15 @@
                             <label for="inputZip">File Size</label>
                             <input v-model="file_size" type="text" class="form-control" id="inputZip" />
                         </div>
-                        <div class="form-group  mt-2">
+                        <div class="form-group  mt-2 mb-2">
     <label for="exampleFormControlFile1 mr-1">Logo   </label>
 
     <input type="file" class="form-control-file" id="exampleFormControlFile1"  @change="handleFileChange">
   </div>
-                        <br>
+
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" >Save</button>
                 </form>
             </div>
         </div>
@@ -148,6 +156,7 @@
 <script>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { router } from '@inertiajs/vue3';
+import { reactive } from 'vue';
 
 export default {
     props:{
@@ -158,15 +167,19 @@ export default {
     },
     data() {
         return {
-            cards: [1],
             name:"",
             tags:"",
             file_size:"",
             link_sketshup:"",
             link_collada:"",
             link_3ds:"",
+            link_lumion:"",
+            sub:this.subCategories,
             url_img:"empty",
-            categories:[]
+            categ:"",
+            subcateg:"",
+            selectedFile:Object,
+            cat_id:0
         };
     },
     methods: {
@@ -178,13 +191,49 @@ export default {
             }
         },
         handleFileChange: function (event) {
-      const selectedFile = event.target.files[0];
-      this.url_img = URL.createObjectURL(selectedFile);
+      this.selectedFile = event.target.files[0];
+      this.url_img = URL.createObjectURL(this.selectedFile);
       console.log(this.loadCategories);
 
-    }
+    },
+     submit_product(){
+     const form = reactive({
+         name:this.name,
+            tags:this.tags,
+            file_size:this.file_size,
+            link_sketshup:this.link_sketshup,
+            link_collada:this.link_3ds,
+            link_lumion:this.link_lumion,
+            link_3ds:this.link_collada,
+            img:this.selectedFile,
+            cat_id:this.subcateg
+     })
+
+     router.post('product/store', form);
+}
 
     },
+    computed: {
+    filteredItems() {
+        if(this.categ.length!=0){
+            const arry= this.subCategories.filter((item) => {
+          return item.name.toLowerCase().indexOf(this.categ.toLowerCase()) > -1;
+
+      });
+      return arry;
+        }else{
+            this.subcateg=" ";
+        }
+    },
+    Subcategorie2(){
+        if(this.subcateg!=0){
+
+      return   this.subCategories.filter((item) => {
+          return item.id==this.subcateg
+      })[0].sub_categorie
+    }
+}
+  }
 
 };
 </script>
@@ -213,7 +262,7 @@ export default {
     flex-direction: row-reverse;
     width: 95%;
     height: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .btn-primary{
   transition: all 0.2s;

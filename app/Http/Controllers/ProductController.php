@@ -48,22 +48,26 @@ class ProductController extends Controller
  * Store a newly created resource in storage.
  */
 
-// public function store(Request $request): RedirectResponse
-// {
-//     $validated=$request->validate([
-//         "name"=>'required',
-//         "address_line_1"=>'required',
-//         "address_line_2"=>'required',
-//         "address_line_3"=>['required'],
-//         "state"=>'required',
-//         "zip_code"=>'required',
-//         "contact_number"=>'required'
-//      ]);
-//      $validated['user_id']=auth()->id();
-//      Delivery_address::create($validated);
-//      return Redirect::route('delivery_address.index');
+public function store(Request $request)
+{
+    $validated=$request->validate([
+        "name"=>'required',
+        "tags"=>'required',
+        "file_size"=>'required',
+        "link_sketshup",
+        "link_collada",
+        "link_3ds",
+        "cat_id"=>'required',
+        "img"=>'required'
+     ]);
+     if($request->hasFile('img')){
+        $formfileds['img']=$request->file('img')->store('logos','public');
+    }
+     $validated['user_id']=auth()->id();
+     Product::create($validated);
+     return Redirect::route('product.index');
 
-// }
+}
 
 
 
