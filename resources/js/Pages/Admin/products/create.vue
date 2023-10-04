@@ -108,8 +108,7 @@
                       <div class="form-group col-md-4">
                             <label for="inputState">Category</label>
                             <select id="inputState" class="form-control">
-                                <option selected>private page</option>
-                                <option>public page</option>
+                                <option v-for="item in loadCategories" >{{ item.name }}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
@@ -151,6 +150,9 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { router } from '@inertiajs/vue3';
 
 export default {
+    props:{
+        loadCategories:Object,subCategories:Object
+    },
     components: {
         AdminLayout,
     },
@@ -164,8 +166,7 @@ export default {
             link_collada:"",
             link_3ds:"",
             url_img:"empty",
-            default_img:'../../../../../public/assets/img/property-1.jpg'
-
+            categories:[]
         };
     },
     methods: {
@@ -179,16 +180,12 @@ export default {
         handleFileChange: function (event) {
       const selectedFile = event.target.files[0];
       this.url_img = URL.createObjectURL(selectedFile);
+      console.log(this.loadCategories);
 
-        // // this.file_image=selectedFile;
-        // const reader = new FileReader();
-        // reader.addEventListener("load", () => {
-        //   this.url_img = reader.result;
-        // });
-        // reader.readAsDataURL(selectedFile);
+    }
 
     },
-    },
+
 };
 </script>
 <style>

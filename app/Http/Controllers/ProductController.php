@@ -19,7 +19,9 @@ class ProductController extends Controller
    }
 
    public function create(){
-    return Inertia::render('Admin/products/create');
+    $loadCategories= Categorie::select('name')->distinct('name')->get();
+    $subCategories=Categorie::get();
+    return Inertia::render('Admin/products/create',compact('loadCategories','subCategories'));
 }
 
 /**

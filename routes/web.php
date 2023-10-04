@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -38,10 +39,12 @@ Route::middleware('auth')->group(function () {
     // Route::resource("/wp-admin/product",ProductController::class);
 
 });
+
 Route::get("/wp-admin/login",[AuthController::class,'index'])->name('admin.login');
 //login
 Route::post("/wp-admin/login",[AuthController::class,'login'])->name("wp-admin.authentication");
 Route::resource("/wp-admin/product",ProductController::class);
+Route::resource("/Categorie",CategorieController::class);
 
 
 require __DIR__.'/auth.php';
