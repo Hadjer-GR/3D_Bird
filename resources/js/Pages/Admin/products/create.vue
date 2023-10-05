@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="d-su-m">
                                         <div class="d-flex d-item border-top" v-if="link_sketshup.length!=0">
-                                            <a  :href="link_sketshup" target="_blank" class="flex-fill text-center py-2"
+                                            <a  @click.prevent="downloadFile(link_sketshup)" target="_blank" class="flex-fill text-center py-2"
                                                 >Sketshup 2015</a
                                             >
                                         </div>
@@ -157,6 +157,10 @@
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
+// import mega from 'megajs'
+import { File } from 'https://cdn.skypack.dev/megajs@1'
+
+
 
 export default {
     props:{
@@ -210,6 +214,32 @@ export default {
      })
 
      router.post('product/store', form);
+}, downloadFile(url){
+ try{
+  fetch(url)
+  .then(res => {
+    if (res.status != 200) { console.log("Bad server response"); }
+    return res.blob();
+  })
+// .then(res => res.blob())
+.then(data => {
+
+    const  link =document.createElement("a");
+  link.href=URL.createObjectURL(data);
+  link.download=new Date().getTime();
+  link.click();
+
+})
+.catch(error => console.log('error', error));
+
+
+
+
+
+
+ }catch(err){
+console.log(err);
+ }
 }
 
     },

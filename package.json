@@ -27,6 +27,7 @@
         "alpinejs": "^3.13.1",
         "bootstrap": "^5.3.2",
         "bootstrap-vue": "^2.23.1",
+        "megajs": "^1.1.4",
         "vue-pagination-bootstrap": "^1.0.3"
     }
 }
