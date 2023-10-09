@@ -157,8 +157,12 @@
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
-// import mega from 'megajs'
-import { File } from 'https://cdn.skypack.dev/megajs@1'
+
+// import {File,Storage} from 'megajs';
+// import { Storage } from 'https://cdn.skypack.dev/megajs'
+import { Storage ,File } from 'https://cdn.skypack.dev/megajs'
+
+// import { File ,Storage  } from 'https://cdn.skypack.dev/megajs@1'
 
 
 
@@ -214,23 +218,95 @@ export default {
      })
 
      router.post('product/store', form);
-}, downloadFile(url){
+}, async downloadBuffer(fileFromUrl){
+     var filename="";
+     var filetype="";
+     var type="";
+    await  fileFromUrl.loadAttributes((error, file) => {
+       filename=file.name.toString().split('.')[0];
+       filetype=file.name.toString().split('.')[1];
+       type="application/"+filetype.toString();
+       
+
+    })
+   if(type.length!=0){
+    const data = await fileFromUrl.downloadBuffer();
+     var blob = new Blob([data], {type: type});
+    var link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+
+   }
+
+
+
+}
+
+
+,async downloadFile(url){
  try{
-  fetch(url)
-  .then(res => {
-    if (res.status != 200) { console.log("Bad server response"); }
-    return res.blob();
-  })
-// .then(res => res.blob())
-.then(data => {
 
-    const  link =document.createElement("a");
-  link.href=URL.createObjectURL(data);
-  link.download=new Date().getTime();
-  link.click();
+const storage =  new Storage({
+  email: 'hadjerghrab00@gmail.com',
+  password: 'mama1718',
+  userAgent: null
+}, error => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("you login in ");
+    const fileFromUrl = File.fromURL(url);
+     this.downloadBuffer(fileFromUrl);
+//   console.log(fileFromUrl['name']);
 
-})
-.catch(error => console.log('error', error));
+
+//      fileFromUrl.downloadBuffer((error, data) => {
+//   if (error) console.error(error)
+//   console.log(data)
+
+// })
+
+
+    //   fileFromUrl.loadAttributes((err, file) => {
+    //    })
+  }
+});
+
+
+
+
+//    const fileFromUrl = File.fromURL(url)
+//    await fileFromUrl.loadAttributes()
+//      fileFromUrl.loadAttributes((err, file) => {
+//       })
+//   console.log(fileFromUrl);
+//       console.log(fileFromUrl);
+//       const stream = fileFromUrl.download()
+// stream.on('error', error => console.error(error))
+// stream.pipe(fs.createWriteStream(file.name));
+
+//    console.log(fileFromUrl.loadAttributes());
+//   fetch(url,{
+//   method: 'GET', // You can adjust the HTTP method if necessary
+//   headers: {
+//     // Include any required headers here
+//   },})
+//   .then(res => {
+//     if (res.status != 200) { console.log("Bad server response"); }
+//     console.log(res.blob());
+//     return res.blob();
+//   })
+// // .then(res => res.blob())
+// .then(data => {
+
+//     const  link =document.createElement("a");
+//   link.href=URL.createObjectURL(data);
+//   link.download=new Date().getTime();
+//   link.click();
+
+// })
+// .catch(error => console.log('error', error));
 
 
 
@@ -240,7 +316,19 @@ export default {
  }catch(err){
 console.log(err);
  }
-}
+},
+DownloadFile(file) {
+            const blob = new Blob([file], { type: file.type });
+            const blobUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = file.name;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(blobUrl);
+        }
 
     },
     computed: {

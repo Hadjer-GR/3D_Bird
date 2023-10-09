@@ -28,6 +28,7 @@
         "bootstrap": "^5.3.2",
         "bootstrap-vue": "^2.23.1",
         "megajs": "^1.1.4",
+        "node-stream": "^1.7.0",
         "vue-pagination-bootstrap": "^1.0.3"
     }
 }
