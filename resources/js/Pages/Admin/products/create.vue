@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/layout/generalLayout.css" />
     <link rel="stylesheet" href="../../css/general/general.css" />
     <link rel="stylesheet" href="../../css/admin/product/ProductList.css" />
+    <link rel="stylesheet" href="../../css/loading-bar.css" />
 
     <AdminLayout>
         <div class="container_create">
@@ -54,15 +55,89 @@
                                     </div>
                                     <div class="d-su-m">
                                         <div class="d-flex d-item border-top" v-if="link_sketshup.length!=0">
-                                            <a  @click.prevent="downloadFile(link_sketshup)" target="_blank" class="flex-fill text-center py-2"
+                                            <a  @click.prevent="downloadFile(link_sketshup,show_progressBar($event,'.load_Sketshup'))" target="_blank" class="flex-fill text-center py-2"
                                                 >Sketshup 2015</a
                                             >
+
+
+<div class="loader loader--style5 load_Sketshup close_load"  title="4" >
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+    <rect x="0" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="10" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="20" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+  </svg>
+</div>
+
                                         </div>
                                         <div class="d-flex d-item border-top" v-if="link_3ds.length!=0">
-                                            <a href="#" target="_blank" class="flex-fill text-center py-2">3ds </a>
+                                            <a :href="link_3ds" target="_blank" class="flex-fill text-center py-2">3ds </a>
+
+                                            <div class="loader loader--style5 load_3ds close_load"  title="4" >
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+    <rect x="0" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="10" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="20" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+  </svg>
+</div>
+
                                         </div>
                                         <div class="d-flex d-item border-top" v-if="link_collada.length!=0">
                                             <a href="#" target="_blank" class="flex-fill text-center py-2">Collada</a>
+                                            <div class="loader loader--style5 load_collada close_load"  title="4" >
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+    <rect x="0" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="10" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+    <rect x="20" y="0" width="4" height="10" fill="#333">
+      <animateTransform attributeType="xml"
+        attributeName="transform" type="translate"
+        values="0 0; 0 20; 0 0"
+        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+    </rect>
+  </svg>
+</div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,19 +225,22 @@
                 </form>
             </div>
         </div>
+
     </AdminLayout>
+    <!-- <script type="text/javascript" src="../../js/loading-bar.js"></script> -->
+
 </template>
+
 
 <script>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 
-// import {File,Storage} from 'megajs';
+import {File,Storage} from 'megajs';
 // import { Storage } from 'https://cdn.skypack.dev/megajs'
-import { Storage ,File } from 'https://cdn.skypack.dev/megajs'
+// import { Storage ,File } from 'https://cdn.skypack.dev/megajs';
 
-// import { File ,Storage  } from 'https://cdn.skypack.dev/megajs@1'
 
 
 
@@ -191,11 +269,19 @@ export default {
         };
     },
     methods: {
-        show_sub: function (event) {
+         show_sub: function (event) {
             var element = event.target.parentElement.parentElement.querySelector('.d-su-m');
             console.log(event.target.parentElement.parentElement);
             if (element) {
                 element.classList.toggle('show_sub');
+            }
+        },
+        show_progressBar: function (event,type) {
+            var element = event.target.parentElement.querySelector(type);
+            console.log(event.target.parentElement);
+            if (element) {
+                element.classList.toggle('close_load');
+                return  element;
             }
         },
         handleFileChange: function (event) {
@@ -218,95 +304,57 @@ export default {
      })
 
      router.post('product/store', form);
-}, async downloadBuffer(fileFromUrl){
+},
+
+async downloadBuffer(fileFromUrl){
      var filename="";
      var filetype="";
      var type="";
+
+
     await  fileFromUrl.loadAttributes((error, file) => {
        filename=file.name.toString().split('.')[0];
        filetype=file.name.toString().split('.')[1];
        type="application/"+filetype.toString();
-       
-
+     console.log(type);
     })
-   if(type.length!=0){
-    const data = await fileFromUrl.downloadBuffer();
+
+    const data= await fileFromUrl.downloadBuffer();
      var blob = new Blob([data], {type: type});
     var link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.download = filename;
     link.click();
 
-   }
+
 
 
 
 }
 
 
-,async downloadFile(url){
+,async downloadFile (url,element){
  try{
 
-const storage =  new Storage({
-  email: 'hadjerghrab00@gmail.com',
-  password: 'mama1718',
-  userAgent: null
-}, error => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("you login in ");
+// const storage =  new Storage({
+//   email: 'hadjerghrab00@gmail.com',
+//   password: 'mama1718',
+//   userAgent: null
+// }, error => {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("you login in ");
+//     const fileFromUrl = File.fromURL(url);
+//      this.downloadBuffer(fileFromUrl,element);
+
+//   }
+// });
+     console.log(element);
     const fileFromUrl = File.fromURL(url);
-     this.downloadBuffer(fileFromUrl);
-//   console.log(fileFromUrl['name']);
+     await  this.downloadBuffer(fileFromUrl);
+    element.classList.toggle('close_load');
 
-
-//      fileFromUrl.downloadBuffer((error, data) => {
-//   if (error) console.error(error)
-//   console.log(data)
-
-// })
-
-
-    //   fileFromUrl.loadAttributes((err, file) => {
-    //    })
-  }
-});
-
-
-
-
-//    const fileFromUrl = File.fromURL(url)
-//    await fileFromUrl.loadAttributes()
-//      fileFromUrl.loadAttributes((err, file) => {
-//       })
-//   console.log(fileFromUrl);
-//       console.log(fileFromUrl);
-//       const stream = fileFromUrl.download()
-// stream.on('error', error => console.error(error))
-// stream.pipe(fs.createWriteStream(file.name));
-
-//    console.log(fileFromUrl.loadAttributes());
-//   fetch(url,{
-//   method: 'GET', // You can adjust the HTTP method if necessary
-//   headers: {
-//     // Include any required headers here
-//   },})
-//   .then(res => {
-//     if (res.status != 200) { console.log("Bad server response"); }
-//     console.log(res.blob());
-//     return res.blob();
-//   })
-// // .then(res => res.blob())
-// .then(data => {
-
-//     const  link =document.createElement("a");
-//   link.href=URL.createObjectURL(data);
-//   link.download=new Date().getTime();
-//   link.click();
-
-// })
-// .catch(error => console.log('error', error));
 
 
 
@@ -387,6 +435,37 @@ DownloadFile(file) {
 }
 .btn-primary:hover{
   transform: scale(1.02);
+}
+
+#ProgressBar1{
+  margin: 1px;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+svg path,
+svg rect{
+  fill: var(--primary);
+}
+.load_file{
+    display: flex !important;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+    border: 1px solid red;
+    /* color: var(--primary) !important; */
+}
+.load_text{
+    font-size: 0.7em !important;
+    color: var(--primary) !important;
+    margin-right: 4px !important;
+}
+.load_Sketshup,.load_collada,.load_3ds{
+    margin-right: 4px;
+}
+.close_load{
+display:none !important ;
+
 }
 @media only screen and (max-width: 1160px) {
     .container_create {

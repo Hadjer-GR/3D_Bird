@@ -8,6 +8,8 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import {Link,Head,useForm} from "@inertiajs/vue3"
+
+
 // import {pagination} from 'laravel-vue-pagination';
 // import { BPagination } from 'bootstrap-vue'
 // import  {BPagination } from '../../node_modules/bootstrap-vue'
@@ -21,6 +23,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(useForm)
+            // .use(ProgressBar,ProgressBar)
             .component('Link',Link)
             .component('Head',Head)
             .mixin({methods:{route}})
