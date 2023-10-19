@@ -66,7 +66,7 @@ public function store(Request $request)
     }
      $validated['user_id']=auth()->id();
       Product::create($validated);
-     return Redirect::route('product.index');
+     return Redirect::route('product.index')->with('message','Model created seccusfully');
 
 }
 

@@ -12,7 +12,9 @@
 <AdminLayout>
     <div  v-if="$page.props.flush.message" class="alert alert-success" id="flush" >
        {{ $page.props.flush.message}}
-      <button @click.prevent=" close()">X</button>
+      <button @click.prevent=" close()" class="mesg-h"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+  <path d="M13 1L1 13M1 1L13 13" stroke="#101828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></button>
 
     </div>
    <!-- Property List Start -->
@@ -74,10 +76,17 @@
               <tr v-for="(item, index) in products.data" :key="index" class="item-product">
                 <td class="body_product">
                   <div class="n-1">
-                    <img
-                      class="n1-2"
-                      src="../../../../../public/assets/img/back3.png"
-                    />
+
+                    <img v-if="item.logo"
+                                                class="n1-2"
+                                                :src="'/storage/'+item.logo"
+                                                alt="logo"
+                                        />
+                                        <img v-else
+                                                class="n1-2"
+                                                src="../../../../../public/assets/img/back3.png"
+                                                alt="logo"
+                                        />
 
                   </div>
                 </td>
@@ -182,32 +191,5 @@ computed: {
 
 }
 </script>
-<style >
-.container{
-    z-index: 50 !important;
-}
-.container-layout{
-    justify-content: unset !important;
-}
-.navbar{
-   position: relative !important;
-}
-.insert_model{
-    margin-left: 50px;
-    background-color: var(--primary);
-    padding: 15px 10px;
-    color: white !important;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 1.1em !important;
-    transition: all 0.2s;
-}
-.insert_model:hover{
-    transform: scale(1.1);
-}
-.hover{
-    background-color: var(--primary) !important;
-}
 
-</style>
 

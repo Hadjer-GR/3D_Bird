@@ -223,6 +223,35 @@ transform: scale(1.02);
     font-size: 0.9em !important;
     transform: all 0.2s;
 }
+.container{
+    z-index: 50 !important;
+}
+.container-layout{
+    justify-content: unset !important;
+}
+.navbar{
+   position: relative !important;
+}
+.insert_model{
+    margin-left: 50px;
+    background-color: var(--primary);
+    padding: 15px 10px;
+    color: white !important;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1em !important;
+    transition: all 0.2s;
+}
+.mesg-h{
+    transition: all 0.2s;
+}
+.insert_model:hover,.mesg-h:hover{
+    transform: scale(1.1);
+}
+.hover{
+    background-color: var(--primary) !important;
+}
+
 /*
   * mobile phone
   */

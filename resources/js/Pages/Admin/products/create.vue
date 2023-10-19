@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../css/general/general.css" />
     <link rel="stylesheet" href="../../css/admin/product/ProductList.css" />
     <link rel="stylesheet" href="../../css/loading-bar.css" />
+    <link rel="stylesheet" href="../../css/admin/product/create.css" />
+
 
     <AdminLayout>
         <div class="container_create">
@@ -22,12 +24,12 @@
                                     <div class="position-relative overflow-hidden">
                                         <a
                                             ><img v-if="url_img!='empty'"
-                                                class="img-fluid" style="min-height: 200px;"
+                                                class="img-fluid img-fluid-p" style="min-height: 200px;"
                                                 :src="url_img "
                                                 alt=""
                                         />
                                         <img v-else  style="min-height: 200px;"
-                                                class="img-fluid"
+                                                class="img-fluid img-fluid-p"
                                                 src="../../../../../public/assets/img/property-1.jpg"
                                                 alt=""
                                         />
@@ -82,11 +84,11 @@
                     <div class="">
                         <div class="form-group col-md-6">
                             <label for="inputName4">Name</label>
-                            <input v-model="form.title" type="text" class="form-control" id="inputName4" placeholder="name" />
+                            <input v-model="form.title" required type="text" class="form-control" id="inputName4" placeholder="name" />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">tags</label>
-                            <input v-model="form.tags" type="text" class="form-control" id="inputPassword4" placeholder="tags" />
+                            <input v-model="form.tags" required type="text" class="form-control" id="inputPassword4" placeholder="tags" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -122,36 +124,36 @@
                      <div class="row mt-2">
                       <div class="form-group col-md-4">
                             <label for="inputState">Category</label>
-                            <select id="inputState" class="form-control" v-model="categ">
+                            <select required id="inputState" class="form-control" v-model="categ">
                                 <option v-for="item in loadCategories" >{{ item.name }}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">Sub Categorie</label>
-                            <select id="inputState" class="form-control" v-model="form.cat_id">
+                            <select required id="inputState" class="form-control" v-model="form.cat_id">
                                 <option :value="sub_cat.id" v-for="sub_cat in filteredItems">{{ sub_cat.sub_categorie }}</option>
                             </select>
                         </div>
                      </div>
                         <div class="form-group col-md-4 mt-1">
                             <label for="inputState">State</label>
-                            <select id="inputState" v-model="form.state" class="form-control">
+                            <select required id="inputState" v-model="form.state" class="form-control">
                                 <option selected>private page</option>
                                 <option>public page</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputZip">File Size</label>
-                            <input v-model="form.file_size" type="text" class="form-control" id="inputZip" />
+                            <input required v-model="form.file_size" type="text" class="form-control" id="inputZip" />
                         </div>
                         <div class="form-group  mt-2 mb-2">
     <label for="exampleFormControlFile1 mr-1">Logo   </label>
 
-    <input type="file" class="form-control-file" id="exampleFormControlFile1" @input="form.img=$event.target.files[0]"  @change="handleFileChange">
+    <input type="file" class="form-control-file" required id="exampleFormControlFile1" @input="form.img=$event.target.files[0]"  @change="handleFileChange">
   </div>
 
                     </div>
-
+                   <div > <p v-if="Object.values(errors).length!=0" style="color:red;">You must fill at least one of the following fields: link SketchUp, link Collada, link 3DS, or link Lumion</p></div>
                     <button type="submit" class="btn btn-primary" >Save</button>
                 </form>
             </div>
@@ -167,18 +169,15 @@
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { router ,useForm} from '@inertiajs/vue3';
 
-import { reactive } from 'vue';
 
-import {File,Storage} from 'megajs';
-// import { Storage } from 'https://cdn.skypack.dev/megajs'
-// import { Storage ,File } from 'https://cdn.skypack.dev/megajs';
+
 
 
 
 
 export default {
     props:{
-        loadCategories:Object,subCategories:Object
+        loadCategories:Object,subCategories:Object,errors:Object
     },
     components: {
         AdminLayout,
@@ -242,10 +241,10 @@ export default {
         }
     },
     Subcategorie2(){
-        if(this.subcateg!=0){
+        if(this.form.cat_id!=null){
 
       return   this.subCategories.filter((item) => {
-          return item.id==this.subcateg
+          return item.id==this.form.cat_id
       })[0].sub_categorie
     }
 }
@@ -253,78 +252,4 @@ export default {
 
 };
 </script>
-<style>
-.create_p {
-    flex-basis: 60%;
-    /* z-index: 200 !important; */
-    /* margin-right: 100px; */
-}
-.display_p {
-    flex-basis: 30%;
-    /* border: 1px solid red; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-}
 
-.card_p {
-    min-width: 300px;
-}
-.container_create {
-    position: relative;
-    display: flex;
-    flex-direction: row-reverse;
-    width: 95%;
-    height: auto;
-    /* margin-top: 20px; */
-}
-.btn-primary{
-  transition: all 0.2s;
-}
-.btn-primary:hover{
-  transform: scale(1.02);
-}
-
-#ProgressBar1{
-  margin: 1px;
-  width: 100%;
-  height: auto;
-  position: relative;
-}
-svg path,
-svg rect{
-  fill: var(--primary);
-}
-.load_file{
-    display: flex !important;
-    justify-content: center;
-    align-content: center;
-    align-items: baseline;
-    border: 1px solid red;
-    /* color: var(--primary) !important; */
-}
-.load_text{
-    font-size: 0.7em !important;
-    color: var(--primary) !important;
-    margin-right: 4px !important;
-}
-.load_Sketshup,.load_collada,.load_3ds{
-    margin-right: 4px;
-}
-.close_load{
-display:none !important ;
-
-}
-@media only screen and (max-width: 1160px) {
-    .container_create {
-        flex-direction: column !important;
-    }
-}
-/* @media (max-width: 1060px) {
-  .col-lg-4-m {
-    width: 24.33333% !important;
-  }
-} */
-</style>
