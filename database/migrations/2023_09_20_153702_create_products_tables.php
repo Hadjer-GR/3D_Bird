@@ -21,17 +21,16 @@ return new class extends Migration
          if(!Schema::hasTable('products_tables')){
         Schema::create('products_tables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cat_id')->constrained()->onDelete('cascade');
+            $table->foreignId('cat_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string("title");
             $table->string("state");
-            $table->string("type");
             $table->string("logo")->nullable();
             $table->string("file_size");
-            $table->string("link_sketshup");
-            $table->string("link_3ds");
-            $table->string("link_collada");
-            $table->string("link_lumion");
+            $table->string("link_sketshup")->nullable();
+            $table->string("link_3ds")->nullable();
+            $table->string("link_collada")->nullable();
+            $table->string("link_lumion")->nullable();
             $table->string("tags");
             $table->timestamps();
         });

@@ -20,7 +20,6 @@ class ProductFactory extends Factory
             'title'=>$this->faker->word(),
             'tags'=>'#stair ,#seat',
             'state'=>'accepted',
-            'type'=>'Product,Material',
             'file_size'=>$this->faker->randomNumber(),
             'link_sketshup'=>$this->faker->url(),
             'link_3ds'=>$this->faker->url(),

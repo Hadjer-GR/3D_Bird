@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
             'email'=>"ghrabhadjerr@gmail.com",
             'password'=>'12345'
         ]);
-        Categorie::factory(40)->create([
+        Categorie::factory(3)->create([
             'name'=>'architecture',
         ])->each(function($categorie) use($user){
-            Product::factory(5)->create([
+            Product::factory(1)->create([
                 'cat_id'=>$categorie->id,
                 'user_id'=>$user->id
             ]);
