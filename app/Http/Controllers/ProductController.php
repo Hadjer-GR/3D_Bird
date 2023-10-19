@@ -51,20 +51,21 @@ class ProductController extends Controller
 public function store(Request $request)
 {
     $validated=$request->validate([
-        "name"=>'required',
+        "title"=>'required',
         "tags"=>'required',
+        "state"=>'required',
         "file_size"=>'required',
-        "link_sketshup",
-        "link_collada",
-        "link_3ds",
+        "link_sketshup"=>'required_without_all:link_3ds,link_collada,link_lumion',
+        "link_collada"=>'required_without_all:link_3ds,link_sketshup,link_lumion',
+        "link_3ds"=>'required_without_all:link_sketshup,link_collada,link_lumion',
+        "link_lumion"=>'required_without_all:link_3ds,link_collada,link_sketshup',
         "cat_id"=>'required',
-        "img"=>'required'
      ]);
      if($request->hasFile('img')){
-        $formfileds['img']=$request->file('img')->store('logos','public');
+        $validated['logo']=$request->file('img')->store('logos','public');
     }
      $validated['user_id']=auth()->id();
-     Product::create($validated);
+      Product::create($validated);
      return Redirect::route('product.index');
 
 }

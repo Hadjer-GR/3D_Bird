@@ -43,8 +43,8 @@
                                         </div>
                                     </div>
                                     <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">{{ file_size }}</h5>
-                                        <a class="d-block h5 mb-2" href="">{{ name }}</a>
+                                        <h5 class="text-primary mb-3">{{ form.file_size }}</h5>
+                                        <a class="d-block h5 mb-2" href="">{{ form.title }}</a>
                                         <br />
                                         <!-- <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Hadjer Ghrab</p> -->
                                     </div>
@@ -54,90 +54,21 @@
                                         >
                                     </div>
                                     <div class="d-su-m">
-                                        <div class="d-flex d-item border-top" v-if="link_sketshup.length!=0">
-                                            <a  @click.prevent="downloadFile(link_sketshup,show_progressBar($event,'.load_Sketshup'))" target="_blank" class="flex-fill text-center py-2"
-                                                >Sketshup 2015</a
-                                            >
+                                        <div class="d-flex d-item border-top" v-if="form.link_sketshup.length!=0">
+                                            <a :href="form.link_sketshup"  target="_blank" class="flex-fill text-center py-2"
+                                                >Sketshup 2015</a>
 
 
-<div class="loader loader--style5 load_Sketshup close_load"  title="4" >
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-    <rect x="0" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="10" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="20" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-  </svg>
-</div>
 
                                         </div>
-                                        <div class="d-flex d-item border-top" v-if="link_3ds.length!=0">
-                                            <a :href="link_3ds" target="_blank" class="flex-fill text-center py-2">3ds </a>
-
-                                            <div class="loader loader--style5 load_3ds close_load"  title="4" >
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-    <rect x="0" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="10" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="20" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-  </svg>
-</div>
-
+                                        <div class="d-flex d-item border-top" v-if="form.link_3ds.length!=0">
+                                            <a :href="form.link_3ds" target="_blank" class="flex-fill text-center py-2">3ds </a>
                                         </div>
-                                        <div class="d-flex d-item border-top" v-if="link_collada.length!=0">
-                                            <a href="#" target="_blank" class="flex-fill text-center py-2">Collada</a>
-                                            <div class="loader loader--style5 load_collada close_load"  title="4" >
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-    <rect x="0" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="10" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="20" y="0" width="4" height="10" fill="#333">
-      <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-  </svg>
-</div>
+                                        <div class="d-flex d-item border-top" v-if="form.link_collada.length!=0">
+                                            <a :href="form.link_collada" target="_blank" class="flex-fill text-center py-2">Collada</a>
+                                        </div>
+                                        <div class="d-flex d-item border-top" v-if="form.link_lumion.length!=0">
+                                            <a :href="form.link_lumion" target="_blank" class="flex-fill text-center py-2">Collada</a>
                                         </div>
                                     </div>
                                 </div>
@@ -151,20 +82,20 @@
                     <div class="">
                         <div class="form-group col-md-6">
                             <label for="inputName4">Name</label>
-                            <input v-model="name" type="text" class="form-control" id="inputName4" placeholder="name" />
+                            <input v-model="form.title" type="text" class="form-control" id="inputName4" placeholder="name" />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">tags</label>
-                            <input v-model="tags" type="text" class="form-control" id="inputPassword4" placeholder="tags" />
+                            <input v-model="form.tags" type="text" class="form-control" id="inputPassword4" placeholder="tags" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress"> Download link sketshup</label>
-                        <input v-model="link_sketshup" type="text" class="form-control" id="inputAddress" placeholder="sketshup" />
+                        <input v-model="form.link_sketshup" type="text" class="form-control" id="inputAddress" placeholder="sketshup" />
                     </div>
                     <div class="form-group">
                         <label for="inputAddress2"> Download link 3ds</label>
-                        <input v-model="link_3ds"
+                        <input v-model="form.link_3ds"
                             type="text"
                             class="form-control"
                             id="inputAddress2"
@@ -172,7 +103,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputAddress2">Download link collada</label>
-                        <input v-model="link_collada"
+                        <input v-model="form.link_collada"
                             type="text"
                             class="form-control"
                             id="inputAddress2"
@@ -180,7 +111,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputAddress2">Download link lumion</label>
-                        <input v-model="link_lumion"
+                        <input v-model="form.link_lumion"
                             type="text"
                             class="form-control"
                             id="inputAddress2"
@@ -197,26 +128,26 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">Sub Categorie</label>
-                            <select id="inputState" class="form-control" v-model="subcateg">
+                            <select id="inputState" class="form-control" v-model="form.cat_id">
                                 <option :value="sub_cat.id" v-for="sub_cat in filteredItems">{{ sub_cat.sub_categorie }}</option>
                             </select>
                         </div>
                      </div>
                         <div class="form-group col-md-4 mt-1">
                             <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
+                            <select id="inputState" v-model="form.state" class="form-control">
                                 <option selected>private page</option>
                                 <option>public page</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputZip">File Size</label>
-                            <input v-model="file_size" type="text" class="form-control" id="inputZip" />
+                            <input v-model="form.file_size" type="text" class="form-control" id="inputZip" />
                         </div>
                         <div class="form-group  mt-2 mb-2">
     <label for="exampleFormControlFile1 mr-1">Logo   </label>
 
-    <input type="file" class="form-control-file" id="exampleFormControlFile1"  @change="handleFileChange">
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" @input="form.img=$event.target.files[0]"  @change="handleFileChange">
   </div>
 
                     </div>
@@ -234,7 +165,8 @@
 
 <script>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { router } from '@inertiajs/vue3';
+import { router ,useForm} from '@inertiajs/vue3';
+
 import { reactive } from 'vue';
 
 import {File,Storage} from 'megajs';
@@ -253,19 +185,24 @@ export default {
     },
     data() {
         return {
-            name:"",
+            form:useForm({
+            title:"",
             tags:"",
+            state:"",
             file_size:"",
             link_sketshup:"",
             link_collada:"",
-            link_3ds:"",
             link_lumion:"",
+            link_3ds:"",
+            img:null,
+            cat_id:null
+     }),
+
             sub:this.subCategories,
             url_img:"empty",
             categ:"",
             subcateg:"",
-            selectedFile:Object,
-            cat_id:0
+            selectedFile:null,
         };
     },
     methods: {
@@ -276,107 +213,20 @@ export default {
                 element.classList.toggle('show_sub');
             }
         },
-        show_progressBar: function (event,type) {
-            var element = event.target.parentElement.querySelector(type);
-            console.log(event.target.parentElement);
-            if (element) {
-                element.classList.toggle('close_load');
-                return  element;
-            }
-        },
-        handleFileChange: function (event) {
+
+    handleFileChange: function (event) {
       this.selectedFile = event.target.files[0];
       this.url_img = URL.createObjectURL(this.selectedFile);
-      console.log(this.loadCategories);
+      console.log(this.selectedFile);
+
 
     },
      submit_product(){
-     const form = reactive({
-         name:this.name,
-            tags:this.tags,
-            file_size:this.file_size,
-            link_sketshup:this.link_sketshup,
-            link_collada:this.link_3ds,
-            link_lumion:this.link_lumion,
-            link_3ds:this.link_collada,
-            img:this.selectedFile,
-            cat_id:this.subcateg
-     })
-
-     router.post('product/store', form);
-},
-
-async downloadBuffer(fileFromUrl){
-     var filename="";
-     var filetype="";
-     var type="";
-
-
-    await  fileFromUrl.loadAttributes((error, file) => {
-       filename=file.name.toString().split('.')[0];
-       filetype=file.name.toString().split('.')[1];
-       type="application/"+filetype.toString();
-     console.log(type);
-    })
-
-    const data= await fileFromUrl.downloadBuffer();
-     var blob = new Blob([data], {type: type});
-    var link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
-
-
-
-
-
+        this.form.post('/wp-admin/product',{
+            forceFormData:true
+        });
 }
 
-
-,async downloadFile (url,element){
- try{
-
-// const storage =  new Storage({
-//   email: 'hadjerghrab00@gmail.com',
-//   password: 'mama1718',
-//   userAgent: null
-// }, error => {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("you login in ");
-//     const fileFromUrl = File.fromURL(url);
-//      this.downloadBuffer(fileFromUrl,element);
-
-//   }
-// });
-     console.log(element);
-    const fileFromUrl = File.fromURL(url);
-     await  this.downloadBuffer(fileFromUrl);
-    element.classList.toggle('close_load');
-
-
-
-
-
-
-
- }catch(err){
-console.log(err);
- }
-},
-DownloadFile(file) {
-            const blob = new Blob([file], { type: file.type });
-            const blobUrl = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = blobUrl;
-            link.download = file.name;
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(blobUrl);
-        }
 
     },
     computed: {

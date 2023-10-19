@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string("link_sketshup");
             $table->string("link_3ds");
             $table->string("link_collada");
+            $table->string("link_lumion");
             $table->string("tags");
             $table->timestamps();
         });

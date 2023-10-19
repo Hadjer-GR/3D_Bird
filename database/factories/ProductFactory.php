@@ -25,6 +25,7 @@ class ProductFactory extends Factory
             'link_sketshup'=>$this->faker->url(),
             'link_3ds'=>$this->faker->url(),
             'link_collada'=>$this->faker->url(),
+            'link_lumion'=>$this->faker->url(),
 
         ];
     }
