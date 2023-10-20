@@ -23,9 +23,9 @@
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
                                         <a
-                                            ><img v-if="url_img!='empty'"
+                                            ><img v-if="form.logo"
                                                 class="img-fluid img-fluid-p" style="min-height: 200px;"
-                                                :src="url_img "
+                                                :src="!url_img?'/storage/'+form.logo:form.logo"
                                                 alt=""
                                         />
                                         <img v-else  style="min-height: 200px;"
@@ -149,18 +149,17 @@
                         <div class="form-group  mt-2 mb-2">
     <label for="exampleFormControlFile1 mr-1">Logo   </label>
 
-    <input type="file" class="form-control-file" required id="exampleFormControlFile1" @input="form.img=$event.target.files[0]"  @change="handleFileChange">
+    <input type="file" class="form-control-file"  id="exampleFormControlFile1" @input="form.img=$event.target.files[0]"  @change="handleFileChange">
   </div>
 
                     </div>
-                   <div > <p v-if="Object.values(errors).length!=0" style="color:red;">You must fill at least one of the following fields: link SketchUp, link Collada, link 3DS, or link Lumion</p></div>
-                    <button type="submit" class="btn btn-primary" >Save</button>
+                     <div > <p v-if="Object.values(errors).length!=0" style="color:red;">{{errors}}You must fill at least one of the following fields: link SketchUp, link Collada, link 3DS, or link Lumion</p></div>
+                     <button type="submit" class="btn btn-primary" >Save</button>
                 </form>
             </div>
         </div>
 
     </AdminLayout>
-    <!-- <script type="text/javascript" src="../../js/loading-bar.js"></script> -->
 
 </template>
 
@@ -177,7 +176,7 @@ import { router ,useForm} from '@inertiajs/vue3';
 
 export default {
     props:{
-        loadCategories:Object,subCategories:Object,errors:Object
+        loadCategories:Object,subCategories:Object,errors:Object,product:Object,selected_cat:Object
     },
     components: {
         AdminLayout,
@@ -185,21 +184,22 @@ export default {
     data() {
         return {
             form:useForm({
-            title:"",
-            tags:"",
-            state:"",
-            file_size:"",
-            link_sketshup:"",
-            link_collada:"",
-            link_lumion:"",
-            link_3ds:"",
+            title:this.product.title,
+            tags:this.product.tags,
+            state:this.product.state,
+            file_size:this.product.file_size,
+            link_sketshup:this.product.link_sketshup!=null?this.product.link_sketshup :"",
+            link_collada:this.product.link_collada !=null?this.product.link_collada :"",
+            link_lumion:this.product.link_lumion !=null?this.product.link_lumion :"",
+            link_3ds:this.product.link_3ds !=null?this.product.link_3ds :"",
             img:null,
-            cat_id:null
+            logo:this.product.logo,
+            cat_id:this.product.cat_id
      }),
 
             sub:this.subCategories,
-            url_img:"empty",
-            categ:"",
+            url_img:false,
+            categ:this.selected_cat.name ,
             subcateg:"",
             selectedFile:null,
         };
@@ -215,15 +215,26 @@ export default {
 
     handleFileChange: function (event) {
       this.selectedFile = event.target.files[0];
-      this.url_img = URL.createObjectURL(this.selectedFile);
-      console.log(this.selectedFile);
+     this.form.logo = URL.createObjectURL(this.selectedFile);
+     this.url_img=true;
 
 
     },
      submit_product(){
-        this.form.post('/wp-admin/product',{
-            forceFormData:true
-        });
+        const formdata=new FormData();
+            formdata.append('title',this.form.title);
+            formdata.append('state',this.form.state);
+            formdata.append('tags',this.form.tags);
+            formdata.append('file_size',this.form.file_size);
+            formdata.append('link_sketshup',this.form.link_sketshup);
+            formdata.append('link_collada',this.form.link_collada);
+            formdata.append('link_lumion',this.form.link_lumion);
+            formdata.append('link_3ds',this.form.link_3ds);
+            formdata.append('cat_id',this.form.cat_id);
+            formdata.append('img',this.selectedFile);
+            formdata.append('_method','put');
+
+      router.post(`/wp-admin/product/${this.product.id}`,formdata);
 }
 
 

@@ -99,13 +99,13 @@
 
                 <td class="sp body_product">{{ item.file_size }}</td>
                 <td class="body_product">
-                  <button class="chat">
+                  <button class="chat"  @click.prevent="show_product(item.id)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M3 11.9999C3 11.9999 6.27273 5.49994 12 5.49994C17.7273 5.49994 21 11.9999 21 11.9999C21 11.9999 17.7273 18.4999 12 18.4999C6.27273 18.4999 3 11.9999 3 11.9999Z" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M12 14.4999C13.1046 14.4999 14 13.3807 14 11.9999C14 10.6192 13.1046 9.49994 12 9.49994C10.8954 9.49994 10 10.6192 10 11.9999C10 13.3807 10.8954 14.4999 12 14.4999Z" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
                   </button>
-                  <button class="chat">
+                  <button class="chat" @click.prevent="edit_product(item.id)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M17 3C17.2626 2.73735 17.5744 2.52901 17.9176 2.38687C18.2608 2.24473 18.6286 2.17157 19 2.17157C19.3714 2.17157 19.7392 2.24473 20.0824 2.38687C20.4256 2.52901 20.7374 2.73735 21 3C21.2626 3.26264 21.471 3.57444 21.6131 3.9176C21.7553 4.26077 21.8284 4.62856 21.8284 5C21.8284 5.37143 21.7553 5.73923 21.6131 6.08239C21.471 6.42555 21.2626 6.73735 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
@@ -117,9 +117,7 @@
   <path d="M8 6.00006V4.00006C8 3.46963 8.21071 2.96092 8.58579 2.58585C8.96086 2.21077 9.46957 2.00006 10 2.00006H14C14.5304 2.00006 15.0391 2.21077 15.4142 2.58585C15.7893 2.96092 16 3.46963 16 4.00006V6.00006M19 6.00006V20.0001C19 20.5305 18.7893 21.0392 18.4142 21.4143C18.0391 21.7893 17.5304 22.0001 17 22.0001H7C6.46957 22.0001 5.96086 21.7893 5.58579 21.4143C5.21071 21.0392 5 20.5305 5 20.0001V6.00006H19Z" stroke="#98A9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-<!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <path d="M7.5 2.5H12.5M2.5 5H17.5M15.8333 5L15.2489 13.7661C15.1612 15.0813 15.1174 15.7389 14.8333 16.2375C14.5833 16.6765 14.206 17.0294 13.7514 17.2497C13.235 17.5 12.5759 17.5 11.2578 17.5H8.74221C7.42409 17.5 6.76503 17.5 6.24861 17.2497C5.79396 17.0294 5.41674 16.6765 5.16665 16.2375C4.88259 15.7389 4.83875 15.0813 4.75107 13.7661L4.16667 5M8.33333 8.75V12.9167M11.6667 8.75V12.9167" stroke="#B42318" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg> -->
+
 
 </button>
                 </td>
@@ -177,6 +175,12 @@ methods: {
   delete_product(id){
     console.log(id);
      router.delete(`product/${id}`);
+  },
+  edit_product(id){
+    router.get(`/wp-admin/product/${id}/edit`);
+  },show_product(id){
+    router.get(`/wp-admin/product/${id}`);
+
   },
   close(){
             router.get('product');
