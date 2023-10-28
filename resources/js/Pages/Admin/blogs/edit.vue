@@ -9,11 +9,11 @@
 
 <AdminLayout>
     <div class="container_create container_create_blog ">
-  <input required v-model="form.title" class="blog_t" type="text" placeholder=" the title">
+  <input required v-model="blog.title" class="blog_t" type="text" placeholder=" the title">
 <!-- <h2>hadjer gigi</h2> -->
 
-    <QuillEditor  :modules="modules" toolbar="full" ref="editor"/>
-    <button    class="btn_blog"  @click="SubmitBlog()">publish </button>
+    <QuillEditor  ref="editor"  :modules="modules_2" toolbar="full"/>
+    <button    class="btn_blog"  @click="SubmitBlog()">Update </button>
 
 
 <!-- <button    class="btn_blog"  @click="SubmitBlog()">publish </button> -->
@@ -39,17 +39,25 @@ components:{
     AdminLayout,
 
 },
-
+props:{
+        blog:Object,
+},
+mounted(){
+    this.$refs.editor.setHTML(this.blog.content_html);
+},
 data(){
 return{
     form:useForm({
             title:"",
+            content:"",
            content_html:""
      }),
+     title:this.blog.title,
+
 }
 },
 setup: () => {
-    const modules = {
+    const modules_2 = {
     name: 'imageUploader',
         module: ImageUploader,
         options: {
@@ -69,17 +77,16 @@ setup: () => {
               })
             })
           },
-    return (){ modules }
+    return (){ modules_2 }
   }
 }
 },
 methods: {
     SubmitBlog(){
+         this.form.title=this.title;
         this.form.content_html=this.$refs.editor.getHTML();
 
-        this.form.post('/wp-admin/blogs',{
-            forceFormData:true
-        });
+        this.form.put(`/wp-admin/blogs/${this.blog.id}`);
     }
 },
 

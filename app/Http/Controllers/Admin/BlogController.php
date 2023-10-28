@@ -37,7 +37,6 @@ class BlogController extends Controller
     public function store(Request $request){
         $validated=$request->validate([
             "title"=>'required',
-            "content"=>'required',
             "content_html"=>'required',
 
          ]);
@@ -49,7 +48,6 @@ class BlogController extends Controller
 {
     $validated=$request->validate([
         "title"=>'required',
-        "content"=>'required',
         "content_html"=>'required',
 
      ]);
