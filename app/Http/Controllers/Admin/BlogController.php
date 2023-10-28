@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Redirect;
 class BlogController extends Controller
 {
     public function index(){
-        return Inertia::render('Admin/blogs/index');
+        $blogs=Blog::get();
+        return Inertia::render('Admin/blogs/index',compact('blogs'));
     }
 
 
