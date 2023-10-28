@@ -5,9 +5,11 @@
 
         </Head>
 
-    <link rel="stylesheet" href="../../css/layout/generalLayout.css" />
-        <link rel="stylesheet" href="../../css/general/general.css" />
-        <link rel="stylesheet" href="../../css/admin/product/ProductList.css" />
+    <link rel="stylesheet" href="/css/layout/generalLayout.css" />
+        <link rel="stylesheet" href="/css/general/general.css" />
+        <link rel="stylesheet" href="/css/admin/product/ProductList.css" />
+        <!-- <link rel="stylesheet" href="/css/admin/product/create.css" /> -->
+
 
 <AdminLayout>
     <div  v-if="$page.props.flush.message" class="alert alert-success" id="flush" >
@@ -28,7 +30,8 @@
  <div class="c-search">
       <div class="searchsection">
         <div class="searchbar">
-          <span class="searchbar_icon">
+         <a class="sear-i" @click.prevent="searchProduct()">
+             <span class="searchbar_icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="21"
@@ -45,17 +48,43 @@
               />
             </svg>
           </span>
+         </a>
           <input
             type="text"
+            @keypress.enter="searchProduct()"
             class="searchbar__input"
             v-model="search"
             placeholder=" Search for  models, collections, catalogs, or materials"
           />
+          <a class="sear-i" @click.prevent="show_filter=!show_filter">
+             <span class="searchbar_icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20" fill="none">
+  <path d="M4 19V12M4 8V1M12 19V10M12 6V1M20 19V14M20 10V1M1 12H7M9 6H15M17 14H23" stroke="#101828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+          </span>
+         </a>
         </div>
       </div>
-      <!-- <Link href="/wp-admin/product" :data="{ search }" preserve-state  class="btn btn-primary py-3 px-5 me-3 animated fadeIn search-btn">Search</Link> -->
 
+    <div v-if="show_filter">
+        <div class="filter-con mt-3">
+                      <div class="form-group col-md-4">
+                            <label for="inputState">Category</label>
+                            <select required id="inputState" class="form-control" v-model="categorie">
+                                <option  value="">All</option>
+                                <option v-for="item in loadCategories" >{{ item.name }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Sub Categorie</label>
+                            <select required id="inputState" class="form-control" v-model="subcateg">
+                                <option  value="">All</option>
+                                <option  v-for="sub_cat in filteredItems">{{ sub_cat.sub_categorie }}</option>
+                            </select>
+                        </div>
+                     </div>
     </div>
+</div>
       <!-- table -->
       <div class="s-1">
         <div class="m-1">
@@ -126,8 +155,7 @@
           </table>
         </div>
       </div>
-
-    <pagination class="mt-6" :links="products.links" />
+    <pagination class="mt-6" :links="products.links" :search_product="search" :subcateg="FormatData(subcateg)" :categ="FormatData(categ)" />
 
 
                         </div>
@@ -159,11 +187,15 @@ created(){
 
 },
     props:{
-        products:Object,state:Object
+        products:Object,state:Object,search_product:Object,loadCategories:Object,subCategories:Object,errors:Object,categ:Object,sub_categ:Object
     },
     data(){
       return{
-        search: "",
+        show_filter:false,
+        categorie:this.categ!=null?this.categ:"",
+        subcateg:this.sub_categ!=null?this.sub_categ:"",
+        cat_id:0,
+        search:this.search_product!=null?this.search_product:"",
         exampleItems:[1,2,3,4,5],
         pageOfItems: [],
 
@@ -182,14 +214,40 @@ methods: {
     router.get(`/wp-admin/product/${id}`);
 
   },
+  searchProduct(){
+    console.log(this.categorie);
+   const data={
+       'search_product':this.search,
+       'categ':String(this.categorie),
+       'sub_categ':String(this.subcateg)
+          }
+
+
+    router.get(`/wp-admin/product`,data);
+
+  },
   close(){
             router.get('product');
-        }
+        },
+       FormatData($var){
+        return String($var);
+       }
 },
 computed: {
     getdata(){
         console.log(this.products);
 
+    },
+    filteredItems() {
+        if(this.categorie.length!=0){
+            const arry= this.subCategories.filter((item) => {
+          return item.name.toLowerCase().indexOf(this.categorie.toLowerCase()) > -1;
+
+      });
+      return arry;
+        }else{
+            this.subcateg="";
+        }
     }
 },
 

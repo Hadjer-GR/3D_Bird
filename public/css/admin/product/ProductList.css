@@ -253,7 +253,27 @@ transform: scale(1.02);
 .hover{
     background-color: var(--primary) !important;
 }
-
+.sear-i{
+    transition: all 0.2s;
+}
+.sear-i:hover{
+    transform: scale(1.2);
+}
+.form-control:disabled, .form-control:read-only {
+    background-color: white;
+    opacity: 1;
+  }
+  .filter-con{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:end;
+    align-items:end;
+    /* border: 1px solid red; */
+    position: relative;
+    width: 95%;
+    /* display: inline; */
+  }
 /*
   * mobile phone
   */

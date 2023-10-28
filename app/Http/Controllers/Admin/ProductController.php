@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Categorie;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 
 
 class ProductController extends Controller
 {
-   public function index(){
-
-      $products=Product::with('categories')->paginate(4);
-      return Inertia::render('Admin/products/index',['products'=>$products]);
+   public function index(Request $request){
+      $loadCategories= Categorie::select('name')->distinct('name')->get();
+      $subCategories=Categorie::get();
+      $products=Product::with('categories')->filter(request(['search_product','categ','sub_categ']))->paginate(4);
+       return Inertia::render('Admin/products/index',['products'=>$products,'search_product'=>$request->search_product,'categ'=>$request->categ,'sub_categ'=>$request->sub_categ,'loadCategories'=>$loadCategories,'subCategories'=> $subCategories]);
 
    }
 

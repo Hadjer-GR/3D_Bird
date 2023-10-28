@@ -7,7 +7,8 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
-import {Link,Head,useForm} from "@inertiajs/vue3"
+import {Link,Head,useForm} from "@inertiajs/vue3";
+import { QuillEditor } from '@vueup/vue-quill'
 
 
 // import {pagination} from 'laravel-vue-pagination';
@@ -23,9 +24,9 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(useForm)
-            // .use(ProgressBar,ProgressBar)
             .component('Link',Link)
             .component('Head',Head)
+            .component('QuillEditor', QuillEditor)
             .mixin({methods:{route}})
             .mount(el);
     },
