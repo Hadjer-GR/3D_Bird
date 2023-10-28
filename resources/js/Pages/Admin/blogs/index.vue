@@ -6,14 +6,20 @@
         </Head>
 
         <link rel="stylesheet" href="/css/layout/generalLayout.css" />
-
+        <link rel="stylesheet" href="/css/general/general.css" />
 <AdminLayout>
-    <div class="container_create " style="border:1px solid red">
-<!-- <h2>hadjer gigi</h2> -->
+    <div  v-if="$page.props.flush.message" class="alert alert-success" id="flush" >
+       {{ $page.props.flush.message}}
+      <button @click.prevent="close()" class="mesg-h"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+  <path d="M13 1L1 13M1 1L13 13" stroke="#101828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></button>
 
-<QuillEditor v-model:content="content" :modules="modules" toolbar="full" ref="editor"/>
+    </div>
 
-<button    class="btn2"  @click="SubmitBlog()" style=" border-radius:10px; border:none; color:white; background-color:crimson; padding:15px 10px; cursor:pointer;" >publish </button>
+
+    <div class="container_create ">
+
+<button    class="btn_blog"  @click="create_blog()">publish </button>
 
         </div>
 
@@ -22,10 +28,9 @@
 
 <script>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
-import ImageUploader from 'quill-image-uploader';
+
 import { ref } from 'vue'
+import { router ,useForm} from '@inertiajs/vue3';
 
 
 
@@ -36,41 +41,36 @@ components:{
 },
 data(){
 return{
-    content:"",
-}
-},
-setup: () => {
-    const modules = {
-    name: 'imageUploader',
-        module: ImageUploader,
-        options: {
-          upload: file => {
-            return new Promise((resolve, reject) => {
-              const formData = new FormData();
-              formData.append("image", file);
 
-              axios.post('/upload-image', formData)
-              .then(res => {
-                console.log(res)
-                resolve(res.data.url);
-              })
-              .catch(err => {
-                reject("Upload failed");
-                console.error("Error:", err)
-              })
-            })
-          },
-    return (){ modules }
-  }
 }
 },
+
 methods: {
-    SubmitBlog(){
-        console.log(this.$refs.editor.getHTML())
-        console.log( JSON.stringify(this.content));
-    }
+    create_blog(){
+        router.get("/wp-admin/blogs/create");
+    },
+    close(){
+            router.get('/wp-admin/blogs');
+        }
 },
 
 }
 
 </script>
+
+<style>
+.btn_blog{
+    margin: 10px;
+    border-radius:10px;
+    border:none;
+     color:white;
+    background-color:crimson;
+    padding:15px 10px;
+     cursor:pointer;
+transition: all 0.2s;
+}
+.btn_blog:hover{
+    font-weight: 600;
+    transform: scale(1.1);
+}
+</style>
