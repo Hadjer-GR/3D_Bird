@@ -63,44 +63,58 @@
                         <div class="row g-4">
                             <div
                                 class="col-lg-4 col-md-6 wow fadeInUp col-lg-4-m d-show"
-                                v-for="(card, index) in cards"
+                                v-for="(item, index) in products.data"
                                 :key="index">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href=""
-                                            ><img class="img-fluid" src="../../../public/assets/img/property-1.jpg" alt=""
-                                        /></a>
+                                        <a href="">
+                                            <img v-if="item.logo"
+                                                class="n1-gen"
+                                                :src="'/storage/'+item.logo"
+                                                alt="logo"
+                                        />
+                                        <img v-else
+                                                class="n1-gen"
+                                                src="../../../public/assets/img/back3.png"
+                                                alt="logo"
+                                        />
+
+
+                                    </a>
                                         <div
                                             class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                            gigi
+                                            {{ item.categories['sub_categorie'] }}
                                         </div>
                                         <div
                                             class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            gigi
+                                            {{ item.categories['name'] }}
                                         </div>
                                     </div>
                                     <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">8000MB</h5>
-                                        <a class="d-block h5 mb-2" href="">gigi</a>
+                                        <h5 class="text-primary mb-3">{{ item.file_size }}</h5>
+                                        <a class="d-block h5 mb-2" href=""> {{ item.title }}</a>
                                         <br />
                                         <!-- <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Hadjer Ghrab</p> -->
                                     </div>
-                                    <div class="d-flex border-top"  @click.prevent="show_sub($event)">
+                                    <div class="d-flex border-top" @click.prevent="show_sub($event)">
                                         <a href="#" target="_blank" class="flex-fill text-center py-2"
                                             ><i class="fa fa-download text-primary me-2"></i>Download</a
                                         >
                                     </div>
                                     <div class="d-su-m">
-                                        <div class="d-flex d-item  border-top">
-                                            <a href="#" target="_blank" class="flex-fill text-center py-2"
+                                        <div class="d-flex d-item  border-top" v-if="item.link_sketshup">
+                                            <a :href="item.link_sketshup" target="_blank" class="flex-fill text-center py-2"
                                                 >Sketshup 2015</a
                                             >
                                         </div>
-                                        <div class="d-flex d-item  border-top">
-                                            <a href="#" target="_blank" class="flex-fill text-center py-2">3ds </a>
+                                        <div class="d-flex d-item  border-top" v-if="item.link_3ds">
+                                            <a :href="item.link_3ds" target="_blank" class="flex-fill text-center py-2">3ds </a>
                                         </div>
-                                        <div class="d-flex d-item border-top">
-                                            <a href="#" target="_blank" class="flex-fill text-center py-2">Collada</a>
+                                        <div class="d-flex d-item border-top" v-if="item.link_collada">
+                                            <a :href="item.link_collada" target="_blank" class="flex-fill text-center py-2">Collada</a>
+                                        </div>
+                                        <div class="d-flex d-item border-top" v-if="item.link_lumion">
+                                            <a :href="item.link_lumion" target="_blank" class="flex-fill text-center py-2">Lumion</a>
                                         </div>
                                     </div>
                                 </div>
@@ -120,24 +134,35 @@
 <script>
 import layout from '@/Layouts/GeneralLayout.vue';
 export default {
+    props:{
+        products:Object
+    },
     components: {
         layout,
     },
     data() {
         return {
-            cards: [1,2,3,4,5,6,7,8],
+
 
         };
     },methods:{
-      show_sub:function(event){
-     var element= event.target.parentElement.parentElement.querySelector('.d-su-m');
-     console.log(event.target.parentElement.parentElement);
-     if(element){
-      element.classList.toggle('show_sub');
-     }
-
-      }
+        show_sub: function (event) {
+            var element = event.target.parentElement.parentElement.querySelector('.d-su-m');
+            console.log(event.target.parentElement.parentElement);
+            if (element) {
+                element.classList.toggle('show_sub');
+            }
+        },
     }
 };
 </script>
+<style>
+.n1-gen{
+    width: 368.41px !important;
+    height: 291.237px !important;
+    object-fit: fill;
+    background-position: center;
+
+}
+</style>
 

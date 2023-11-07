@@ -19,7 +19,7 @@ class ProductFactory extends Factory
         return [
             'title'=>$this->faker->word(),
             'tags'=>'#stair ,#seat',
-            'state'=>'accepted',
+            'state'=>'public page',
             'file_size'=>$this->faker->randomNumber(),
             'link_sketshup'=>$this->faker->url(),
             'link_3ds'=>$this->faker->url(),

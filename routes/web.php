@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -22,9 +23,7 @@ use Inertia\Inertia;
 
 
 
-Route::get('/', function () {
-    return Inertia::render('General');
-})->name('General');
+Route::get('/', [HomeController::class,'index']);
 
 
 

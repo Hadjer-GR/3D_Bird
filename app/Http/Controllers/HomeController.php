@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
+
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -11,11 +15,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+   
     /**
      * Show the application dashboard.
      *
@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products=Product::with('categories')->where("state","public page")->filter(request(['search_product','categ','sub_categ']))->paginate(4);
+        return Inertia::render('General',['products'=>$products]);
+
     }
 }

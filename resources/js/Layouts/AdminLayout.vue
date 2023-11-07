@@ -19,7 +19,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <Link :href="route('wp-admin.dashboard')"    :class="{'active':$page.url==='/wp-admin/dashboard'}" class=" nav-item nav-link">Home</Link>
+                        <!-- <Link :href="route('wp-admin.dashboard')"    :class="{'active':$page.url==='/wp-admin/dashboard'}" class=" nav-item nav-link">Home</Link> -->
                         <Link :href="route('product.index')"  :class="{'active': $page.url.startsWith('/wp-admin/product')}"  class="nav-item nav-link">Models</Link>
                          <Link :href="route('blogs.index')"  :class="{'active': $page.url.startsWith('/wp-admin/blogs')}"  class="nav-item nav-link">Tutorials</Link>
                         <Link :href="route('wp-admin.logout')"   class="nav-item nav-link btn btn-primary" style="color:#fff !important;">Logout</Link>
