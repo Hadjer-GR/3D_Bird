@@ -60,10 +60,14 @@
               <div class="d-flex justify-content-between align-items-center">
                 <!-- Checkbox -->
                <div class="form-check mb-0">
-                <Checkbox name="remember" v-model:checked="form.remember" />
-
-                  <label class="form-check-label" for="form2Example3">
-                    Remember me
+                  <input
+                    class="form-check-input me-2"
+                    type="checkbox"
+                    v-model="form.remember"
+                    id="isCheked"
+                  />
+                  <label class="form-check-label" for="isCheked">
+                    Remember me {{ status }}
                   </label>
                 </div>
               </div>
@@ -99,7 +103,7 @@ import { useForm ,Link} from '@inertiajs/vue3';
 
 
   export default {
-    props:{errors:Object,canResetPassword:Boolean},
+    props:{errors:Object,canResetPassword:Boolean,status:String},
     components:{
         Link,
     },
