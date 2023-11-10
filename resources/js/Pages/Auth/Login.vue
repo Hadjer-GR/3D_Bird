@@ -32,15 +32,18 @@
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example3"
+                <label class="form-label" 
                   >Email address</label
                 >
                 <input
                   type="email"
                   id="form3Example3"
+                  autocomplete="username"
+
                   class="form-control form-control-lg"
                   placeholder="Enter a valid email address"
                   v-model.lazy.trim="form.email" required
+
                 />
               </div>
 
@@ -53,6 +56,7 @@
                   class="form-control form-control-lg"
                   placeholder="Enter password"
                   v-model.lazy="form.password"
+                  autocomplete="current-password"
                   required
                 />
               </div>
