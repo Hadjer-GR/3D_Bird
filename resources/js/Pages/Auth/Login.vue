@@ -114,7 +114,6 @@ import { useForm ,Link} from '@inertiajs/vue3';
           password: '',
           remember:false
         }),
-        img_url:"../../../../public/assets/img/back3.png",
         }
 
     },

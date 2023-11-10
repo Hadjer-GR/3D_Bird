@@ -113,8 +113,8 @@ import InputError from '@/Components/InputError.vue';
     data(){
         return{
         form :useForm ({
-     token: props.token,
-    email: props.email,
+     token: this.token,
+    email: this.email,
     password: '',
     password_confirmation: '',
         }),
