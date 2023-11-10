@@ -10,7 +10,7 @@
             />
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form @submit.prevent="form.post(route('wp-admin.authentication'))">
+            <form @submit.prevent="submit()">
               <div
                 class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start"
               >
@@ -40,7 +40,7 @@
                   id="form3Example3"
                   class="form-control form-control-lg"
                   placeholder="Enter a valid email address"
-                  v-model.lazy.trim="form.email"
+                  v-model.lazy.trim="form.email" required
                 />
               </div>
 
@@ -71,6 +71,13 @@
                   </label>
                 </div>
               </div>
+              <Link
+                    v-if="canResetPassword"
+                    :href="route('password.request')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Forgot your password?
+                </Link>
 
               <div class="text-center text-lg-start mt-4 pt-2">
                 <button
@@ -92,18 +99,30 @@
 
 
   <script>
-import { useForm } from '@inertiajs/vue3';
+import { useForm ,Link} from '@inertiajs/vue3';
 
 
   export default {
-    props:{errors:Object},
-    setup(){
-        const form =useForm ({
+    props:{errors:Object,canResetPassword:Boolean},
+    components:{
+        Link,
+    },
+    data(){
+        return{
+        form :useForm ({
           email: '',
           password: '',
           remember:false
-        });
-        return {form}
+        }),
+        }
+
+    },
+    methods: {
+    submit(){
+    this.form.post(route('login'), {
+        onFinish: () => form.reset('password'),
+    });
+}
     },
 
 
