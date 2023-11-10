@@ -60,12 +60,8 @@
               <div class="d-flex justify-content-between align-items-center">
                 <!-- Checkbox -->
                <div class="form-check mb-0">
-                  <input
-                    class="form-check-input me-2"
-                    type="checkbox"
-                    v-model="form.remember"
-                    id="form2Example3"
-                  />
+                <Checkbox name="remember" v-model:checked="form.remember" />
+
                   <label class="form-check-label" for="form2Example3">
                     Remember me
                   </label>
